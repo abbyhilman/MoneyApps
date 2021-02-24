@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>276674598159-k2jpf70u3is1iq0gddh71g20timhns5r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.276674598159-k2jpf70u3is1iq0gddh71g20timhns5r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCcj4_8zTr2rOog1N7Y6NPPYp715Un7UPw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>276674598159</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>MoneyApps</string>
+	<key>PROJECT_ID</key>
+	<string>moneyapps-ed563</string>
+	<key>STORAGE_BUCKET</key>
+	<string>moneyapps-ed563.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:276674598159:ios:d639d1404762c034fa1a7a</string>
+</dict>
+</plist>
