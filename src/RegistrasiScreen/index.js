@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  SafeAreaView,
+  Platform,
   View,
-  TextInput,
   TouchableOpacity,
   Alert,
   Text,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
 import axios from 'axios';
+import {TextInput} from '../component';
 
 const RegistrasiScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -69,25 +70,27 @@ const RegistrasiScreen = ({navigation}) => {
     //     }
     //     console.error(error);
     //   });
-    axios.post('https://emoneydti.basicteknologi.co.id/index.php/api/users/registrasi', {
-        email: email,
-        password: password,
-        nama: nama,
-        nomor_handphone: nomorHandphone
-      })
+    axios
+      .post(
+        'https://emoneydti.basicteknologi.co.id/index.php/api/users/registrasi',
+        {
+          email: email,
+          password: password,
+          nama: nama,
+          nomor_handphone: nomorHandphone,
+        },
+      )
       .then(function (response) {
         console.log(response.data);
-        if (response.status == true){
+        if (response.status == true) {
           Alert.alert(
-            "Alert",
+            'Alert',
             response.data.msg,
-            [
-              { text: "Cancel", onPress: () => navigation.navigate('SignIn') }
-            ],
-            { cancelable: false }
+            [{text: 'Cancel', onPress: () => navigation.navigate('SignIn')}],
+            {cancelable: false},
           );
         }
-        Alert.alert(response.data.msg)
+        Alert.alert(response.data.msg);
       })
       .catch(function (error) {
         console.log(error);
@@ -97,58 +100,73 @@ const RegistrasiScreen = ({navigation}) => {
     setNama('');
     setNomorHandphone('');
   };
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.page}>
-        <View style={{alignItems: 'center'}}>
-          <TextInput
-            placeholder="Email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-            }}
-            style={styles.txtInputUser}
-          />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
-            secureTextEntry
-            style={styles.txtInputPass}
-          />
-          <TextInput
-            placeholder="Nama"
-            value={nama}
-            onChangeText={(text) => {
-              setNama(text);
-            }}
-            style={styles.txtInputPass}
-          />
-          <TextInput
-            placeholder="No Handphone"
-            value={nomorHandphone}
-            keyboardType="phone-pad"
-            onChangeText={(number) => {
-              setNomorHandphone(number);
-            }}
-            style={styles.txtInputPass}
-          />
-          <TouchableOpacity
-            style={styles.btn_Regis}
-            onPress={() => {
-              _submitRegistrasi();
-            }}
-            activeOpacity={0.5}>
-            <Text style={styles.txtSubmit}>SUBMIT</Text>
-          </TouchableOpacity>
-        </View>
+    // <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={keyboardVerticalOffset} style={{flex: 1}}>
+    // <View style={styles.container}>
+    //       <View style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
+    //         <TextInput
+    //           placeholder="Email"
+    //           keyboardType="email-address"
+    //           autoCapitalize="none"
+    //           value={email}
+    //           onChangeText={(text) => {
+    //             setEmail(text);
+    //           }}
+    //           // style={styles.txtInputUser}
+    //         />
+
+    //       </View>
+    //   </View>
+    // </KeyboardAvoidingView>
+    <ScrollView contentContainerStyle={styles.scroll}>
+      <View style={styles.container}>
+        <TextInput
+          placeholder="Email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+        />
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          secureTextEntry
+          // style={styles.txtInputPass}
+        />
+        <TextInput
+          placeholder="Nama"
+          value={nama}
+          onChangeText={(text) => {
+            setNama(text);
+          }}
+          // style={styles.txtInputPass}
+        />
+        <TextInput
+          placeholder="No Handphone"
+          value={nomorHandphone}
+          keyboardType="phone-pad"
+          onChangeText={(number) => {
+            setNomorHandphone(number);
+          }}
+          // style={styles.txtInputPass}
+        />
+        <TouchableOpacity
+          style={styles.btn_Regis}
+          onPress={() => {
+            _submitRegistrasi();
+          }}
+          activeOpacity={0.5}>
+          <Text style={styles.txtSubmit}>SUBMIT</Text>
+        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -156,11 +174,15 @@ export default RegistrasiScreen;
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 24,
+    paddingVertical: 26,
+    marginTop: 24,
+    alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
   },
   page: {
     paddingHorizontal: 16,
+    flex: 1,
   },
   txtInputUser: {
     width: 280,
@@ -191,4 +213,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 16,
   },
+  scroll: {flexGrow: 1},
 });

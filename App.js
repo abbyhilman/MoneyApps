@@ -226,40 +226,45 @@ export default function App({navigation}) {
             console.log(response.data);
             if (response.data.status == 'true') {
               //login berhasil
-              Alert.alert(
-                'Success',
-                response.data.msg,
-                [
-                  {
-                    text: 'Cancel',
-                    onPress: async () => {
-                      try {
-                        await AsyncStorage.setItem(
-                          'id_user',
-                          response.data.data.id_user,
-                        );
-                        await AsyncStorage.setItem(
-                          'email_user',
-                          response.data.data.email_user,
-                        );
-                        await AsyncStorage.setItem(
-                          'nama_user',
-                          response.data.data.nama_user,
-                        );
-                        await AsyncStorage.setItem(
-                          'nomor_handphone',
-                          response.data.data.nomor_handphone,
-                        );
-                        await AsyncStorage.setItem('token', 'dummy-auth-token');
-                        dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
-                      } catch (e) {
-                        // saving error
-                      }
+              if (response.data.data.nama_user == "") {
+                Alert.alert('Failed', 'Insert Email and Password')
+              } else {
+                Alert.alert(
+                  'Success',
+                  response.data.msg,
+                  [
+                    {
+                      text: 'Cancel',
+                      onPress: async () => {
+                        try {
+                          await AsyncStorage.setItem(
+                            'id_user',
+                            response.data.data.id_user,
+                          );
+                          await AsyncStorage.setItem(
+                            'email_user',
+                            response.data.data.email_user,
+                          );
+                          await AsyncStorage.setItem(
+                            'nama_user',
+                            response.data.data.nama_user,
+                          );
+                          await AsyncStorage.setItem(
+                            'nomor_handphone',
+                            response.data.data.nomor_handphone,
+                          );
+                          await AsyncStorage.setItem('token', 'dummy-auth-token');
+                          dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+                        } catch (e) {
+                          // saving error
+                        }
+                      },
                     },
-                  },
-                ],
-                {cancelable: false},
-              );
+                  ],
+                  {cancelable: false},
+                );
+              }
+              
             } else {
               //login gagal
               Alert.alert(

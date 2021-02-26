@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, {useContext} from 'react';
 import {
   StyleSheet,
@@ -10,9 +9,8 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 import {AuthContext} from '../Context';
 
 const SignInScreen = ({navigation}) => {
@@ -64,57 +62,50 @@ const SignInScreen = ({navigation}) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.page}>
-          <Image
-            source={require('../../assets/logo_basicschool.png')}
-            style={styles.img}
+    <ScrollView contentContainerStyle={styles.scroll}>
+      <View style={styles.container}>
+        <Image
+          source={require('../../assets/logo_basicschool.png')}
+          style={styles.img}
+        />
+        <Text style={styles.titleTxt}>e-money</Text>
+        <TextInput
+            placeholder="Username"
+            value={username}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            onChangeText={(inputUserName) => {
+              setUsername(inputUserName);
+            }}
+            style={styles.txtInputUser}
           />
-          <Text style={styles.titleTxt}>e-money</Text>
-          <View style={{alignItems: 'center'}}>
-            <TextInput
-              placeholder="Username"
-              value={username}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(inputUserName) => {
-                setUsername(inputUserName);
-              }}
-              style={styles.txtInputUser}
-            />
-            <TextInput
-              placeholder="Password"
-              value={password}
-              onChangeText={(inputPassWord) => {
-                setPassword(inputPassWord);
-              }}
-              secureTextEntry
-              style={styles.txtInputPass}
-            />
-            <TouchableOpacity
-              style={styles.btn_sigin}
-              onPress={() => {
-                _postUser();
-              }}
-              activeOpacity={0.5}>
-              <Text style={styles.txtLogin}>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{}}
-              onPress={() => {
-                navigation.navigate('Registrasi');
-              }}
-              activeOpacity={0.5}>
-              <Text style={styles.txtRegis}>Registrasi</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={(inputPassWord) => {
+              setPassword(inputPassWord);
+            }}
+            secureTextEntry
+            style={styles.txtInputPass}
+          />
+          <TouchableOpacity
+            style={styles.btn_sigin}
+            onPress={() => {
+              _postUser();
+            }}
+            activeOpacity={0.5}>
+            <Text style={styles.txtLogin}>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{}}
+            onPress={() => {
+              navigation.navigate('Registrasi');
+            }}
+            activeOpacity={0.5}>
+            <Text style={styles.txtRegis}>Registrasi</Text>
+          </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -122,10 +113,14 @@ export default SignInScreen;
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 24,
+    paddingVertical: '30%',
+    marginTop: 24,
+    alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
   },
   page: {
+    flex: 1,
     paddingHorizontal: 16,
   },
   img: {
@@ -175,4 +170,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
   },
+  scroll: {flexGrow: 1},
 });
