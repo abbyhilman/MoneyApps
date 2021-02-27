@@ -31,7 +31,6 @@ jobs:
           command: |
             mkdir -p test-results/jest
             yarn android
-            yarn ios
           environment:
             JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
 
