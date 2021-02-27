@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
 import {Alert} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -5,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+
 
 import {AuthContext} from './src/Context';
 import SplashScreen from './src/SplashScreen';
