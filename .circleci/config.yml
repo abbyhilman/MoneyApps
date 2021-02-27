@@ -30,7 +30,7 @@ jobs:
           name: jest tests
           command: |
             mkdir -p test-results/jest
-            yarn start
+            yarn run test
           environment:
             JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
 
@@ -110,9 +110,9 @@ jobs:
           path: output/scan
             
   android-build-and-test:
-    working_directory: ~/demo-react-native/android
+    working_directory: ~/MoneyApps/android
     docker:
-      - image: circleci/android:api-29-node
+      - image: circleci/android:api-30-node
     steps:
       - checkout:
           path: ~/MoneyApps
