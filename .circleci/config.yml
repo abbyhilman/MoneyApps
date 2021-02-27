@@ -30,7 +30,8 @@ jobs:
           name: jest tests
           command: |
             mkdir -p test-results/jest
-            yarn start
+            yarn android
+            yarn ios
           environment:
             JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
 
