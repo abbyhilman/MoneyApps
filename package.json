@@ -26,6 +26,7 @@
     "react": "17.0.0",
     "react-native": "0.63.4",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
+    "react-native-geolocation-service": "^5.2.0",
     "react-native-gesture-handler": "^1.10.1",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",

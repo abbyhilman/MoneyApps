@@ -6,17 +6,20 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
+import moment from 'moment';
 
-const TransferSuccessScreen = ({navigation}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Image source={require('../../assets/transfer.png')} style={styles.img} />
+const TransferSuccessScreen = ({navigation, route}) => {
+  const {nama, transfer} = route.params;
+  console.log(transfer);
+
+  const renderItem = ({item}) => {
+    // const dt = transfer.data.waktu_transaksi;
+    return (
       <View style={{alignItems: 'center'}}>
         <Text style={styles.txtStatus}>Transfer Berhasil!</Text>
-        <Text style={styles.txtNominal}>
-          Rp. 1000
-        </Text>
+        <Text style={styles.txtNominal}>Rp. {transfer.data.nominal_transfer}</Text>
         <View
           style={{
             width: 280,
@@ -26,14 +29,33 @@ const TransferSuccessScreen = ({navigation}) => {
             alignItems: 'center',
             padding: 15,
           }}>
-          <Text style={{fontSize: 18, color: 'white'}}>
-            {/* {transactionStatus.transaction_time} */}
+          <Text style={{fontSize: 18, color: 'white', marginBottom: 17}}>
+            {/* {moment(dt).format('d MMM YYYY')} */}
+            {transfer.data.waktu_transaksi}
           </Text>
-          <Text style={{fontSize: 18, color: 'white', marginTop: 17}}>
-            {/* VA {transactionStatus.bank} */}
+          <Text style={{fontSize: 18, color: 'white'}}>
+            Penerima: {item.nama_user}
+          </Text>
+          <Text style={{fontSize: 18, color: 'white', marginTop: 12}}>
+            {item.nomor_handphone}
           </Text>
           {/* <Text>VA Number: {transactionStatus.va_number}</Text> */}
         </View>
+      </View>
+    );
+  };
+  return (
+    <SafeAreaView style={styles.container}>
+      <Image source={require('../../assets/transfer.png')} style={styles.img} />
+      <View style={{alignItems: 'center'}}>
+        <FlatList
+          data={nama}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id_user}
+          contentContainerStyle={{
+            marginTop: 8,
+          }}
+        />
         <TouchableOpacity
           style={styles.btn_selesai}
           onPress={() => {
@@ -53,7 +75,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   img: {
     width: 240,

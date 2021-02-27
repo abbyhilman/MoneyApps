@@ -120,6 +120,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+console.disableYellowBox = true;
+
 function MainBottomTab() {
   return (
     <Tab.Navigator tabBarOptions={{showLabel: false, activeTintColor: 'black',}}>
