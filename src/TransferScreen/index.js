@@ -12,6 +12,7 @@ import {
   ScrollView,
   PermissionsAndroid,
   ToastAndroid,
+  Linking,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from 'react-native-geolocation-service';
@@ -23,84 +24,104 @@ const TransferSuccess = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [idPenerima, setIdPenerima] = useState('');
+  const [dataMaps, setDataMaps] = useState({});
 
-  // const hasLocationPermission = async () => {
-  //   // if (Platform.OS === 'ios') {
-  //   //   const hasPermission = await this.hasLocationPermissionIOS();
-  //   //   return hasPermission;
-  //   // }
+  const hasLocationPermissionIOS = async () => {
+    const openSetting = () => {
+      Linking.openSettings().catch(() => {
+        Alert.alert('Unable to open settings');
+      });
+    };
+    const status = await Geolocation.requestAuthorization('whenInUse');
 
-  //   if (Platform.OS === 'android' && Platform.Version < 23) {
-  //     return true;
-  //   }
+    if (status === 'granted') {
+      return true;
+    }
 
-  //   const hasPermission = await PermissionsAndroid.check(
-  //     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-  //   );
+    if (status === 'denied') {
+      Alert.alert('Location permission denied');
+    }
 
-  //   if (hasPermission) {
-  //     return true;
-  //   }
+    if (status === 'disabled') {
+      Alert.alert(
+        `Turn on Location Services to allow "${appConfig.displayName}" to determine your location.`,
+        '',
+        [
+          {text: 'Go to Settings', onPress: openSetting},
+          {text: "Don't Use Location", onPress: () => {}},
+        ],
+      );
+    }
 
-  //   const status = await PermissionsAndroid.request(
-  //     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-  //   );
+    return false;
+  };
 
-  //   if (status === PermissionsAndroid.RESULTS.GRANTED) {
-  //     return true;
-  //   }
+  const hasLocationPermission = async () => {
 
-  //   if (status === PermissionsAndroid.RESULTS.DENIED) {
-  //     ToastAndroid.show(
-  //       'Location permission denied by user.',
-  //       ToastAndroid.LONG,
-  //     );
-  //   } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-  //     ToastAndroid.show(
-  //       'Location permission revoked by user.',
-  //       ToastAndroid.LONG,
-  //     );
-  //   }
+    if (Platform.OS === 'android' && Platform.Version < 23) {
+      return true;
+    }
 
-  //   return false;
-  // };
+    const hasPermission = await PermissionsAndroid.check(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    );
 
-  // const getLocation = async () => {
-  //   const hasLocationPermission = await hasLocationPermission();
+    if (hasPermission) {
+      return true;
+    }
 
-  //   if (!hasLocationPermission) {
-  //     return;
-  //   }
+    const status = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    );
 
-  //   this.setState({ loading: true }, () => {
-  //     Geolocation.getCurrentPosition(
-  //       (position) => {
-  //         this.setState({ location: position, loading: false });
-  //         console.log(position);
-  //       },
-  //       (error) => {
-  //         this.setState({ loading: false });
-  //         Alert.alert(`Code ${error.code}`, error.message);
-  //         console.log(error);
-  //       },
-  //       {
-  //         accuracy: {
-  //           android: 'high',
-  //           ios: 'best',
-  //         },
-  //         enableHighAccuracy: this.state.highAccuracy,
-  //         timeout: 15000,
-  //         maximumAge: 10000,
-  //         distanceFilter: 0,
-  //         forceRequestLocation: this.state.forceLocation,
-  //         showLocationDialog: this.state.showLocationDialog,
-  //       },
-  //     );
-  //   });
-  // };
+    if (status === PermissionsAndroid.RESULTS.GRANTED) {
+      return true;
+    }
+
+    if (status === PermissionsAndroid.RESULTS.DENIED) {
+      ToastAndroid.show(
+        'Location permission denied by user.',
+        ToastAndroid.LONG,
+      );
+    } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+      ToastAndroid.show(
+        'Location permission revoked by user.',
+        ToastAndroid.LONG,
+      );
+    }
+
+    return false;
+  };
 
   useEffect(() => {
     _getData();
+    hasLocationPermissionIOS();
+    hasLocationPermission();
+    Geolocation.getCurrentPosition(
+      (position) => {
+        //this.setState({ location: position, loading: false });
+        // console.log(position);
+        setDataMaps(position.coords);
+        //console.log(dataMaps)
+      },
+      (error) => {
+        //this.setState({ loading: false });
+        Alert.alert(`Code ${error.code}`, error.message);
+        console.log(error);
+      },
+      {
+        accuracy: {
+          android: 'high',
+          ios: 'best',
+        },
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000,
+        distanceFilter: 0,
+        forceRequestLocation: false,
+        showLocationDialog: true,
+      },
+    );
   }, []);
 
   const _getData = async () => {
@@ -152,8 +173,8 @@ const TransferSuccess = ({navigation}) => {
           id_pengirim: idUser,
           id_penerima: idPenerima,
           nominal_transfer: nominalTransfer,
-          latitude_transaksi: -6.903,
-          longitude_transaksi: 107.63804,
+          latitude_transaksi: dataMaps.latitude,
+          longitude_transaksi: dataMaps.longitude,
         },
       )
       .then(function (response) {
@@ -161,6 +182,8 @@ const TransferSuccess = ({navigation}) => {
         let DataProcess = response.data;
         if (nominalTransfer == '') {
           Alert.alert('Failed', 'Masukkan Nominal Transfer');
+        } else if (nominalTransfer == 0) {
+          Alert.alert('Failed', 'Masukkan Nominal Lebih dari 0');
         } else {
           navigation.navigate('TransferSuccessScreen', {
             nama: data,
@@ -198,7 +221,7 @@ const TransferSuccess = ({navigation}) => {
       </>
     );
   };
-
+  console.log(dataMaps);
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <View style={styles.container}>
