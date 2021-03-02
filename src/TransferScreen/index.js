@@ -57,6 +57,10 @@ const TransferSuccess = ({navigation}) => {
   };
 
   const hasLocationPermission = async () => {
+    if (Platform.OS === 'ios') {
+      const hasPermission = await this.hasLocationPermissionIOS();
+      return hasPermission;
+    }
 
     if (Platform.OS === 'android' && Platform.Version < 23) {
       return true;
