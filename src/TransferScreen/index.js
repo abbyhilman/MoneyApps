@@ -13,6 +13,7 @@ import {
   PermissionsAndroid,
   ToastAndroid,
   Linking,
+  Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from 'react-native-geolocation-service';
@@ -58,8 +59,8 @@ const TransferSuccess = ({navigation}) => {
 
   const hasLocationPermission = async () => {
     if (Platform.OS === 'ios') {
-      const hasPermission = await this.hasLocationPermissionIOS();
-      return hasPermission;
+      hasLocationPermissionIOS();
+      //return hasPermission;
     }
 
     if (Platform.OS === 'android' && Platform.Version < 23) {
