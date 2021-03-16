@@ -586,6 +586,8 @@ PODS:
     - React-Core
   - react-native-geolocation-service (5.2.0):
     - React
+  - react-native-lottie-splash-screen (0.1.12):
+    - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
   - react-native-webview (11.2.3):
@@ -726,6 +728,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
+  - react-native-lottie-splash-screen (from `../node_modules/react-native-lottie-splash-screen`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -820,6 +823,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-camera"
   react-native-geolocation-service:
     :path: "../node_modules/react-native-geolocation-service"
+  react-native-lottie-splash-screen:
+    :path: "../node_modules/react-native-lottie-splash-screen"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
@@ -917,6 +922,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-camera: 5396a8db53a44121b1312065a3095f0594a92322
   react-native-geolocation-service: 7c9436da6dfdecd9526c62eac62ea2bc3f0cc8ea
+  react-native-lottie-splash-screen: c8c8f4da7cdc1bc20c3c7bc8ec2143fb337e6a1b
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-webview: 6520e3e7b4933de76b95ef542c8d7115cf45b68e
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336

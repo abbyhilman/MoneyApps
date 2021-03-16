@@ -5997,6 +5997,11 @@ react-native-iphone-x-helper@^1.3.0:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
 
+react-native-lottie-splash-screen@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/react-native-lottie-splash-screen/-/react-native-lottie-splash-screen-0.1.12.tgz#3baa99e3606a1fc8af71b78f84bee57607ee9051"
+  integrity sha512-UrLsTGXF6kK5uiNElg+nh3WAgydtiQ7xFT2+unOrLeLdNZi4jyiZ83JgQFlo4tEN7GodZMn5/k8fUYsuus++Zw==
+
 react-native-reanimated@^1.13.2:
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.2.tgz#1ae5457b24b4913d173a5a064bb28eae7783d293"
