@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MoneyApps</string>
+    <!-- Stagging -->
+    <string moduleConfig="true" name="CodePushDeploymentKey">JvJMFoNIzR8f1iju4_xh3n8X9FWmuh2ujKpTs</string>
 </resources>

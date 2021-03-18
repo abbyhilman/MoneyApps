@@ -2,14 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CodePushDeploymentKey</key>
+	<string>JvJMFoNIzR8f1iju4_xh3n8X9FWmuh2ujKpTs</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-  <key>NSCameraUsageDescription</key>
-  <string>Your own description of the purpose</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Your own description of the purpose</string>
 	<key>CFBundleDisplayName</key>
 	<string>MoneyApps</string>
 	<key>CFBundleExecutable</key>
