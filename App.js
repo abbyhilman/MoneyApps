@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {Alert} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {Alert, useColorScheme} from 'react-native';
+import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -303,9 +303,11 @@ export default function App({navigation}) {
     [],
   );
 
+  const scheme = useColorScheme();
+
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack.Navigator>
           {state.isLoading ? (
             // We haven't finished checking for the token yet
