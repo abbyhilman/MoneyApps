@@ -236,6 +236,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				6DBD8CA9C6389C67AC00B7FF /* [CP] Copy Pods Resources */,
+				C7DB01AEF4EF133AF9881C56 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,6 +261,7 @@
 				AA5F3D0877CE6913B7350B39 /* [CP] Copy Pods Resources */,
 				C2B0FBDA0072F7C93757960B /* [CP-User] [RNFB] Core Configuration */,
 				15A4BFDAE228CD190B4417AD /* [CP-User] [RNFB] Crashlytics Configuration */,
+				BF7982BF623B597F7B7FA052 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -582,6 +584,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoneyApps/Pods-MoneyApps-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BF7982BF623B597F7B7FA052 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoneyApps/Pods-MoneyApps-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoneyApps/Pods-MoneyApps-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C2B0FBDA0072F7C93757960B /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -612,6 +632,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7DB01AEF4EF133AF9881C56 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MoneyApps-MoneyAppsTests/Pods-MoneyApps-MoneyAppsTests-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoneyApps-MoneyAppsTests/Pods-MoneyApps-MoneyAppsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E15CBA918F93F6D6FF71ED85 /* [CP] Check Pods Manifest.lock */ = {
